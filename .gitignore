@@ -487,5 +487,6 @@ gradle-app.setting
 
 # End of https://www.toptal.com/developers/gitignore/api/react,intellij,intellij+all,intellij+iml,windows,java,gradle,visualstudiocode,node
 
+# Front end generated files
 **/front-end/node_modules/**
 **/front-end/static/**
