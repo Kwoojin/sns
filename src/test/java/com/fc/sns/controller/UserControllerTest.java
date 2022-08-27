@@ -7,7 +7,9 @@ import com.fc.sns.controller.request.UserLoginRequest;
 import com.fc.sns.exception.ErrorCode;
 import com.fc.sns.exception.SnsApplicationException;
 import com.fc.sns.model.User;
+import com.fc.sns.model.entity.UserEntity;
 import com.fc.sns.service.UserService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
@@ -17,11 +19,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+
+import java.util.Optional;
 
 import static org.mockito.BDDMockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -41,18 +43,17 @@ public class UserControllerTest {
     @Test
     public void 회원가입() throws Exception {
         //given
-        String username = "userName";
+        String username = "name";
         String password = "password";
 
         // TODO : mocking
-        given(userService.join(username, password)).willReturn(any(User.class));
+        given(userService.join(username, password)).willReturn(mock(User.class));
 
         //when & then
         mockMvc.perform(post("/api/v1/users/join")
                         .contentType(MediaType.APPLICATION_JSON)
-                        // TODO : add request body
-                        .content(objectMapper.writeValueAsBytes(new UserJoinRequest(username, password)))
-                ).andDo(print())
+                        .content(objectMapper.writeValueAsBytes(new UserJoinRequest("name", "password"))))
+                .andDo(print())
                 .andExpect(status().isOk());
     }
 
