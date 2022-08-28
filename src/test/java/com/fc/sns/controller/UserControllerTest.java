@@ -62,7 +62,7 @@ public class UserControllerTest {
         //given
         String username = "userName";
         String password = "password";
-        given(userService.join(username, password)).willThrow(new SnsApplicationException(ErrorCode.DUPLICATED_USER_NAME, ""));
+        given(userService.join(username, password)).willThrow(new SnsApplicationException(ErrorCode.DUPLICATED_USER_NAME));
 
         // TODO : mocking
 
@@ -100,7 +100,7 @@ public class UserControllerTest {
         String password = "password";
 
         // TODO : mocking
-        given(userService.login(username, password)).willThrow(new SnsApplicationException(ErrorCode.DUPLICATED_USER_NAME, ""));
+        given(userService.login(username, password)).willThrow(new SnsApplicationException(ErrorCode.USER_NOT_FOUND));
 
         //when & then
         mockMvc.perform(post("/api/v1/users/login")
@@ -117,7 +117,7 @@ public class UserControllerTest {
         String password = "password";
 
         // TODO : mocking
-        given(userService.login(username, password)).willThrow(new SnsApplicationException(ErrorCode.DUPLICATED_USER_NAME, ""));
+        given(userService.login(username, password)).willThrow(new SnsApplicationException(ErrorCode.INVALID_PASSWORD));
 
         //when & then
         mockMvc.perform(post("/api/v1/users/login")
