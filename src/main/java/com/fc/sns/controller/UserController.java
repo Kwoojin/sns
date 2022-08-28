@@ -1,6 +1,7 @@
 package com.fc.sns.controller;
 
 import com.fc.sns.controller.request.UserJoinRequest;
+import com.fc.sns.controller.request.UserLoginRequest;
 import com.fc.sns.controller.response.Response;
 import com.fc.sns.controller.response.UserJoinResponse;
 import com.fc.sns.model.User;
@@ -24,4 +25,11 @@ public class UserController {
         User user = userService.join(request.getUserName(), request.getPassword());
         return Response.success(UserJoinResponse.fromUser(user));
     }
+
+    @PostMapping("/login")
+    public Response<UserLoginResponse> login(@RequestBody UserLoginRequest request) {
+        String token = userService.login(request.getUserName(), request.getPassword());
+        return Response.success(UserLoginResponse.of(token));
+    }
+
 }
