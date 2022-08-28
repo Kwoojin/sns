@@ -18,3 +18,8 @@ spring:
     password: ee0e9fee344cfe92310b8e65e99c3005dc59b87d8d36257cb21dcf5df6f35d97
     platform: postgres
     driver-class-name: org.postgresql.Driver
+
+jwt:
+  secret-key: kwj_test_sns-application-2022.secret_key
+  # 30 days
+  token.expired-time-ms : 2592000000
