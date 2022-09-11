@@ -1,6 +1,5 @@
 package com.fc.sns.model.entity;
 
-import com.fc.sns.model.User;
 import com.fc.sns.model.UserRole;
 import lombok.AccessLevel;
 import lombok.Getter;
