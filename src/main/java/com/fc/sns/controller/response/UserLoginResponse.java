@@ -1,7 +1,5 @@
-package com.fc.sns.controller;
+package com.fc.sns.controller.response;
 
-import com.fc.sns.model.User;
-import com.fc.sns.model.UserRole;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

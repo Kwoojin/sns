@@ -4,6 +4,7 @@ import com.fc.sns.controller.request.UserJoinRequest;
 import com.fc.sns.controller.request.UserLoginRequest;
 import com.fc.sns.controller.response.Response;
 import com.fc.sns.controller.response.UserJoinResponse;
+import com.fc.sns.controller.response.UserLoginResponse;
 import com.fc.sns.model.User;
 import com.fc.sns.service.UserService;
 import lombok.RequiredArgsConstructor;
