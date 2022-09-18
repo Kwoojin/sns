@@ -42,7 +42,7 @@ class UserServiceTest {
         //given
         String userName = "userName";
         String password = "password";
-        UserEntity fixture = UserEntityFixture.get(userName, password);
+        UserEntity fixture = UserEntityFixture.get(userName, password, 1L);
         given(userEntityRepository.findByUserName(userName)).willReturn(Optional.empty());
         given(encoder.encode(password)).willReturn("encrypt password");
         given(userEntityRepository.save(any(UserEntity.class))).willReturn(fixture);
@@ -59,7 +59,7 @@ class UserServiceTest {
         //given
         String userName = "userName";
         String password = "password";
-        UserEntity fixture = UserEntityFixture.get(userName, password);
+        UserEntity fixture = UserEntityFixture.get(userName, password, 1L);
 
         given(userEntityRepository.findByUserName(userName)).willReturn(Optional.of(fixture));
         given(userService.join(userName, password)).willThrow(SnsApplicationException.class);
@@ -79,7 +79,7 @@ class UserServiceTest {
         //given
         String userName = "username";
         String password = "password";
-        UserEntity userEntity = UserEntityFixture.get(userName, encoder.encode(password));
+        UserEntity userEntity = UserEntityFixture.get(userName, encoder.encode(password), 1l);
 
         given(userEntityRepository.findByUserName(userEntity.getUserName())).willReturn(Optional.of(userEntity));
         given(encoder.matches(password, userEntity.getPassword())).willReturn(true);
@@ -96,7 +96,7 @@ class UserServiceTest {
         //given
         String userName = "userName";
         String password = "password";
-        UserEntity fixture = UserEntityFixture.get(userName, encoder.encode(password));
+        UserEntity fixture = UserEntityFixture.get(userName, encoder.encode(password), 1l);
 
         given(userEntityRepository.findByUserName(userName)).willReturn(Optional.empty());
 
@@ -114,7 +114,7 @@ class UserServiceTest {
         String userName = "userName";
         String password = "password";
         String wrongPassword = "wrongPassword";
-        UserEntity fixture = UserEntityFixture.get(userName, password);
+        UserEntity fixture = UserEntityFixture.get(userName, password, 1L);
 
         given(userEntityRepository.findByUserName(userName)).willReturn(Optional.of(fixture));
 

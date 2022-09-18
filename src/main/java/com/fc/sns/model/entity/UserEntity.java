@@ -1,10 +1,7 @@
 package com.fc.sns.model.entity;
 
 import com.fc.sns.model.UserRole;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -43,6 +40,17 @@ public class UserEntity {
 
     @Column(name = "deleted_at")
     private Timestamp deletedAt;
+
+    @Builder
+    public UserEntity(Long id, String userName, String password, UserRole role, Timestamp registeredAt, Timestamp updatedAt, Timestamp deletedAt) {
+        this.id = id;
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
+        this.registeredAt = registeredAt;
+        this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
+    }
 
     @PrePersist
     void registeredAt() {
