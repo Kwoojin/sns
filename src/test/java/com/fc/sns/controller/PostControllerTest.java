@@ -173,7 +173,49 @@ public class PostControllerTest {
     }
 
 
+    @Test
+    @WithMockUser
+    void 피드목록() throws Exception {
+        // TODO : mocking
+        mockMvc.perform(get("/api/v1/posts")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
 
+    }
+
+
+    @Test
+    @WithAnonymousUser
+    void 피드목록요청시_로그인하지_않은경우_에러발생() throws Exception {
+        // TODO : mocking
+        mockMvc.perform(get("/api/v1/posts")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser
+    void 내피드목록() throws Exception {
+        // TODO : mocking
+        mockMvc.perform(get("/api/v1/posts/my")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+    }
+
+
+    @Test
+    @WithAnonymousUser
+    void 내피드목록요청시_로그인하지_않은경우_에러발생() throws Exception {
+        // TODO : mocking
+        mockMvc.perform(get("/api/v1/posts/my")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isUnauthorized());
+    }
 
 
 }
