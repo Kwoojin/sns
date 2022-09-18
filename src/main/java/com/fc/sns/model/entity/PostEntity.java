@@ -1,9 +1,6 @@
 package com.fc.sns.model.entity;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -15,7 +12,7 @@ import java.time.Instant;
 @Setter
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@SQLDelete(sql = "UPDATE \"user\" SET deleted_at = NOW() where id=?")
+@SQLDelete(sql = "UPDATE \"post\" SET deleted_at = NOW() where id=?")
 @Where(clause = "deleted_at is NULL")
 @Table(name = "\"post\"")
 @Entity
@@ -44,6 +41,7 @@ public class PostEntity {
     @Column(name = "deleted_at")
     private Timestamp deletedAt;
 
+
     private PostEntity(String title, String body, UserEntity user, Timestamp registeredAt, Timestamp updatedAt, Timestamp deletedAt) {
         this.title = title;
         this.body = body;
@@ -57,6 +55,7 @@ public class PostEntity {
         return new PostEntity(title, body, user, null, null, null);
     }
 
+    @Builder
     public static PostEntity of(String title, String body, UserEntity user, Timestamp registeredAt, Timestamp updatedAt, Timestamp deletedAt) {
         return new PostEntity(title, body, user, registeredAt, updatedAt, deletedAt);
     }
