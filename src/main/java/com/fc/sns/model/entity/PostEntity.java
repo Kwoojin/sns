@@ -43,6 +43,7 @@ public class PostEntity {
 
 
     private PostEntity(String title, String body, UserEntity user, Timestamp registeredAt, Timestamp updatedAt, Timestamp deletedAt) {
+
         this.title = title;
         this.body = body;
         this.user = user;
