@@ -1,10 +1,15 @@
 package com.fc.sns.model.entity;
 
+import com.fc.sns.model.AlarmArgs;
+import com.fc.sns.model.AlarmType;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -14,29 +19,29 @@ import java.time.Instant;
 
 @Setter
 @Getter
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@SQLDelete(sql = "UPDATE \"comment\" SET deleted_at = NOW() where id=?")
+@SQLDelete(sql = "UPDATE \"alarm\" SET deleted_at = NOW() where id=?")
 @Where(clause = "deleted_at is NULL")
-@Table(name = "\"comment\"", indexes = {
-        @Index(name = "post_id_idx", columnList = "post_id")
-})
+@Table(name = "\"alarm\"")
 @Entity
-public class CommentEntity {
+public class AlarmEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // 알람을 받은 사람
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @ManyToOne
-    @JoinColumn(name = "post_id")
-    private PostEntity post;
+    @Enumerated(EnumType.STRING)
+    private AlarmType alarmType;
 
-    @Column(name = "comment")
-    private String comment;
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "json")
+    private AlarmArgs args;
 
     @Column(name = "registered_at")
     private Timestamp registeredAt;
@@ -48,14 +53,14 @@ public class CommentEntity {
     private Timestamp deletedAt;
 
 
-    private CommentEntity(UserEntity user, PostEntity postEntity, String comment) {
+    private AlarmEntity(UserEntity user, AlarmType alarmType, AlarmArgs args) {
         this.user = user;
-        this.post = postEntity;
-        this.comment = comment;
+        this.alarmType = alarmType;
+        this.args = args;
     }
 
-    public static CommentEntity of(UserEntity userEntity, PostEntity postEntity, String comment) {
-        return new CommentEntity(userEntity, postEntity, comment);
+    public static AlarmEntity of(UserEntity user, AlarmType alarmType, AlarmArgs args) {
+        return new AlarmEntity(user, alarmType, args);
     }
 
     @PrePersist

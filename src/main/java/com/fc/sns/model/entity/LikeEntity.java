@@ -14,7 +14,9 @@ import java.time.Instant;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SQLDelete(sql = "UPDATE \"like\" SET deleted_at = NOW() where id=?")
 @Where(clause = "deleted_at is NULL")
-@Table(name = "\"like\"")
+@Table(name = "\"like\"", indexes = {
+        @Index(name = "user_id_idx", columnList = "user_id")
+})
 @Entity
 public class LikeEntity {
 
