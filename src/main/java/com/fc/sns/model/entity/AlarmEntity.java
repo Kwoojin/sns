@@ -23,7 +23,9 @@ import java.time.Instant;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SQLDelete(sql = "UPDATE \"alarm\" SET deleted_at = NOW() where id=?")
 @Where(clause = "deleted_at is NULL")
-@Table(name = "\"alarm\"")
+@Table(name = "\"alarm\"", indexes = {
+        @Index(name = "user_id_idx", columnList = "user_id")
+})
 @Entity
 public class AlarmEntity {
 
