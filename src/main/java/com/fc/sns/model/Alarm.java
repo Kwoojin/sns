@@ -12,7 +12,7 @@ public class Alarm {
     private Long id;
     private User user;
     private AlarmType alarmType;
-    private AlarmArgs args;
+    private AlarmArgs alarmArgs;
     private Timestamp registeredAt;
     private Timestamp updatedAt;
     private Timestamp deletedAt;

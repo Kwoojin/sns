@@ -23,7 +23,7 @@ public class AlarmResponse {
         return new AlarmResponse(
                 alarm.getId(),
                 alarm.getAlarmType(),
-                alarm.getArgs(),
+                alarm.getAlarmArgs(),
                 alarm.getAlarmType().getAlarmText(),
                 alarm.getRegisteredAt(),
                 alarm.getUpdatedAt(),

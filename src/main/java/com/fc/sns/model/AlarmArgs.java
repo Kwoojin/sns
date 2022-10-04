@@ -1,8 +1,11 @@
 package com.fc.sns.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
+@AllArgsConstructor
 public class AlarmArgs {
 
     // 알림을 발생시킨 사람
